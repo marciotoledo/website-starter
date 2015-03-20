@@ -1,0 +1,22 @@
+RewriteEngine on
+RewriteBase /
+
+### WWW Redirect
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+### Remove .php
+
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+RewriteRule ^index\.php$ / [R]
+
+### Error Pages
+
+ErrorDocument 404 /404.html
+
+### File Access
+
+Options -Indexes
